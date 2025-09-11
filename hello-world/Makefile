@@ -19,3 +19,10 @@ redeploy:
 
 service:
 	kubectl apply -f k8s/service.yaml
+
+clean:
+	kubectl delete -f k8s/service.yaml
+	kubectl delete -f k8s/deployment.yaml
+	kubectl delete -f k8s/secret.yaml
+	kubectl delete -f k8s/config.yaml
+	docker rmi hello:latest || true
