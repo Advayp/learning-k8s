@@ -1,0 +1,28 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: seed-admin
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: seed
+          image: postgres:13
+          command: ["psql"]
+          args: [
+              "-h",
+              "postgres", # Service name, used for DNS resolution within the cluster
+              "-U",
+              "user",
+              "-d",
+              "db",
+              "-c",
+              "INSERT INTO users (name, email) VALUES ('admin', 'admin@example.com');",
+            ]
+          env:
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: postgres-password
