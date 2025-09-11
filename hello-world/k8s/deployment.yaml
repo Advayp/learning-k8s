@@ -18,3 +18,8 @@ spec:
           imagePullPolicy: Never
           ports:
             - containerPort: 5051
+          envFrom:
+            - secretRef:
+                name: hello-world
+            - configMapRef:
+                name: hello-world-config
