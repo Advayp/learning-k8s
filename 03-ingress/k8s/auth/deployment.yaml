@@ -15,7 +15,7 @@ spec:
       containers:
         - name: app
           imagePullPolicy: IfNotPresent
-          image: auth-service:latest
+          image: auth-service-2:latest
           ports:
             - containerPort: 5051
           env:
